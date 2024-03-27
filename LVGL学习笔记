@@ -50,3 +50,11 @@ disp_refr->inv_area_joined[join_from] = 1;
 通过将绘图任务分解成小的单元，可以更好地控制绘图任务的执行顺序和优先级，从而提高绘图的效率和性能。
 此外，`struct _lv_draw_unit_t`还可以用于实现一些高级的绘图效果，例如渐变、阴影、透明度等等。
 通过在`struct _lv_draw_unit_t`中添加一些额外的属性和参数，可以实现更加复杂和高级的绘图效果。
+
+/*Skip palette*/
+    data += LV_COLOR_INDEXED_PALETTE_SIZE(buf->header.cf) * sizeof(lv_color32_t);
+#define LV_COLOR_INDEXED_PALETTE_SIZE(cf) ((cf) == LV_COLOR_FORMAT_I1 ? 2 :\
+                                           (cf) == LV_COLOR_FORMAT_I2 ? 4 :\
+                                           (cf) == LV_COLOR_FORMAT_I4 ? 16 :\
+                                           (cf) == LV_COLOR_FORMAT_I8 ? 256 : 0)
+从这可以看出不同格式下palette的大小。
