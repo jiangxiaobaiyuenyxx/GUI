@@ -1,0 +1,10 @@
+`lv_obj_invalidate()` 函数是 LittlevGL 图形库中的一个函数，用于标记一个对象（object）需要重新绘制。
+当一个对象的外观或状态发生变化时，需要重新绘制该对象以反映这些变化。
+`lv_obj_invalidate()` 函数可以将该对象标记为需要重新绘制，从而触发重新绘制操作。
+
+具体来说，`lv_obj_invalidate()` 函数会将对象的 `invalidate` 标志位置为 `true`，表示该对象需要重新绘制。
+在 LittlevGL 的绘图循环中，会检查所有对象的 `invalidate` 标志位，如果为 `true`，则会调用对象的绘制函数进行重新绘制。
+这样就可以实现对象的动态更新。需要注意的是，`lv_obj_invalidate()` 函数只是标记对象需要重新绘制，实际的重新绘制操作是在 LittlevGL 的绘图循环中进行的。
+因此，如果需要立即重新绘制对象，可以在调用 `lv_obj_invalidate()` 函数后手动调用 `lv_task_handler()` 函数来触发绘图循环。
+
+刷新整个屏幕对象：lv_obj_invalidate(lv_scr_act());
