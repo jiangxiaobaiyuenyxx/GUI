@@ -42,3 +42,11 @@ _lv_area_join(&joined_area, &disp_refr->inv_areas[join_in], &disp_refr->inv_area
 lv_area_copy(&disp_refr->inv_areas[join_in], &joined_area);
 6.对处理过的脏域，进行标记
 disp_refr->inv_area_joined[join_from] = 1;
+
+
+在LVGL中，`struct _lv_draw_unit_t`是一个结构体，用于描述绘图任务的单元。
+它包含了一些绘图任务的相关信息，例如绘图任务的类型、绘图任务的坐标、绘图任务的颜色等等。
+`struct _lv_draw_unit_t`的主要作用是将绘图任务分解成小的单元，以便于在绘图过程中进行优化和调度。
+通过将绘图任务分解成小的单元，可以更好地控制绘图任务的执行顺序和优先级，从而提高绘图的效率和性能。
+此外，`struct _lv_draw_unit_t`还可以用于实现一些高级的绘图效果，例如渐变、阴影、透明度等等。
+通过在`struct _lv_draw_unit_t`中添加一些额外的属性和参数，可以实现更加复杂和高级的绘图效果。
