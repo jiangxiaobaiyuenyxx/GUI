@@ -8,3 +8,14 @@
 因此，如果需要立即重新绘制对象，可以在调用 `lv_obj_invalidate()` 函数后手动调用 `lv_task_handler()` 函数来触发绘图循环。
 
 刷新整个屏幕对象：lv_obj_invalidate(lv_scr_act());
+
+
+`uv_poll_init`函数是libuv库中用于初始化一个`uv_poll_t`结构体的函数。
+`uv_poll_t`结构体是用于监视文件描述符（file descriptor）或套接字（socket）的可读、可写或错误事件的结构体。
+具体来说，`uv_poll_init`函数的作用是将`uv_poll_t`结构体初始化为一个可用的状态。
+它会将`uv_poll_t`结构体中的各个字段设置为默认值，并将其与指定的事件循环（event loop）进行关联。
+在初始化完成后，可以使用`uv_poll_start`函数将`uv_poll_t`结构体与要监视的文件描述符或套接字进行关联，并开始监视其可读、可写或错误事件。
+以下是`uv_poll_init`函数的函数原型：
+int uv_poll_init(uv_loop_t* loop, uv_poll_t* handle, int fd);
+其中，`loop`参数是指向要关联的事件循环的指针，`handle`参数是指向要初始化的`uv_poll_t`结构体的指针，`fd`参数是要监视的文件描述符或套接字的文件描述符值。
+需要注意的是，`uv_poll_init`函数只是将`uv_poll_t`结构体初始化为一个可用的状态，并不会开始监视文件描述符或套接字的事件。要开始监视事件，需要调用`uv_poll_start`函数。
