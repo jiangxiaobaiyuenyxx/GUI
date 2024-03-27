@@ -19,3 +19,11 @@
 int uv_poll_init(uv_loop_t* loop, uv_poll_t* handle, int fd);
 其中，`loop`参数是指向要关联的事件循环的指针，`handle`参数是指向要初始化的`uv_poll_t`结构体的指针，`fd`参数是要监视的文件描述符或套接字的文件描述符值。
 需要注意的是，`uv_poll_init`函数只是将`uv_poll_t`结构体初始化为一个可用的状态，并不会开始监视文件描述符或套接字的事件。要开始监视事件，需要调用`uv_poll_start`函数。
+
+
+`lv_obj_update_layout`是一个LVGL函数，用于更新对象的布局。当对象的位置、大小或对齐方式发生变化时，需要调用此函数来更新对象的布局。
+具体来说，`lv_obj_update_layout`函数会重新计算对象的位置和大小，并根据对象的对齐方式将其放置在正确的位置。如果对象的位置或大小发生了变化，它还会更新对象的子对象的布局。
+需要注意的是，`lv_obj_update_layout`函数只会更新对象的布局，不会重新绘制对象。如果需要重新绘制对象，请调用`lv_obj_invalidate`函数。
+以下是`lv_obj_update_layout`函数的函数原型：
+void lv_obj_update_layout(lv_obj_t * obj);
+其中，`obj`是要更新布局的对象的指针。
