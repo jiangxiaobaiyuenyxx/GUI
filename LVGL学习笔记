@@ -58,3 +58,16 @@ disp_refr->inv_area_joined[join_from] = 1;
                                            (cf) == LV_COLOR_FORMAT_I4 ? 16 :\
                                            (cf) == LV_COLOR_FORMAT_I8 ? 256 : 0)
 从这可以看出不同格式下palette的大小。
+
+1.lv_draw_finalize_task_creation：
+创建和配置绘制任务时需要调用。 它将向小部件发送有关新绘制任务的事件并将其分配给绘制单元
+2.lv_draw_dispatch:
+尝试将绘制任务分派给绘制单元
+3.lv_draw_dispatch_layer
+内部用于尝试调度具体层的绘制任务
+4.最终调用dispatch_cb进行具体的绘制
+
+lv_draw_dispatch_wait_for_request
+等待新的调度请求。
+lv_draw_dispatch_request
+当绘制单元完成绘制任务时，它需要请求调度，让 LVGL 为其分配新的绘制任务
