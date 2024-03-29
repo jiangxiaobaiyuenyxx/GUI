@@ -67,14 +67,17 @@ disp_refr->inv_area_joined[join_from] = 1;
 内部用于尝试调度具体层的绘制任务
 4.最终调用dispatch_cb进行具体的绘制
 5.dispatch_cb由初始化的时候注册实际的处理函数draw_dispatch
-6.draw_dispatch函数
+6.draw_dispatch函数，layer->draw_buf->data中是layer中的target buffer（line205）
+
+
+
 
 lv_draw_dispatch_wait_for_request
 等待新的调度请求。
 lv_draw_dispatch_request
 当绘制单元完成绘制任务时，它需要请求调度，让 LVGL 为其分配新的绘制任务
 lv_draw_get_next_available_task
-获取一个可用的绘制任务（source）
+获取一个可用的绘制任务（source），屏幕上每个层面（layer）存在很多不挨着的脏域（join之后），每个这样的脏域，都是一个绘制任务。
 is_independent
 检查是否有旧的绘制任务重叠的区域t_check
 _lv_area_intersect
