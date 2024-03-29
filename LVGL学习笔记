@@ -59,22 +59,6 @@ disp_refr->inv_area_joined[join_from] = 1;
                                            (cf) == LV_COLOR_FORMAT_I8 ? 256 : 0)
 从这可以看出不同格式下palette的大小。
 
-1.lv_draw_finalize_task_creation：
-创建和配置绘制任务时需要调用。 它将向小部件发送有关新绘制任务的事件并将其分配给绘制单元
-2.lv_draw_dispatch:
-尝试将绘制任务分派给绘制单元
-3.lv_draw_dispatch_layer
-内部用于尝试调度具体层的绘制任务
-4.最终调用dispatch_cb进行具体的绘制
-5.dispatch_cb由初始化的时候注册实际的处理函数draw_dispatch
-6.draw_dispatch函数，layer->draw_buf->data中是layer中的target buffer（line205）
-7.lv_vg_lite_buffer_from_draw_buf，将layer层的targetbuffer（一个小脏域的地址）给到draw_uint
-8.然后就可以根据task->type，调用对应的绘制函数。
-9.以贴图为例子，lv_draw_vg_lite_img
-10.首先，会对绘制需求（task->draw_dsc）进行处理解析，解码出要贴的source image。（lv_vg_lite_buffer_open_image）
-11.然后进行底层贴图的驱动调用，进行贴图操作。
-
-
 
 
 lv_draw_dispatch_wait_for_request
@@ -90,24 +74,8 @@ _lv_area_intersect
 
 
 
-lv_draw_add_task(lv_layer_t * layer, const lv_area_t * coords)
-将脏域的坐标加入一个task,然后加到队列里面去。所谓的脏域，就是本次task所要完成渲染的区域。
-
-
-1.lv_obj_send_event
-用于向指定的对象发送事件。事件可以是用户定义的自定义事件，由event_send_core处理接下来的事情
-event_send_core
-2.lv_event_send(list, e, true)-->lv_obj_event_base--->lv_event_send(list, e, false)
-这样一个流程之后，开始对该obj的父对象进行同样的处理，直到没有可以处理的父对象。
-
-3.lv_obj_event_base(const lv_obj_class_t * class_p, lv_event_t * e)
-调用event_cb，处理事件，event_cb有两个类型，一个是class类型注册回调，一个是具体obj注册的回调函数（lv_obj_add_event_cb）
-
-4.lv_obj_event就是class 类型的event_cb。
-
-5.lv_obj_draw，从lv_event_t中拿到需要绘制的obj对象，得到需要重新绘制obj的哪些区域、背景色、source image等信息（lv_obj_init_draw_rect_dsc）
-
-6.lv_draw_rect，针对layer，开始进行绘制
 
 
 LV_EVENT_PREPROCESS这个宏表示的是在class 类型的event cb处理之前，event 已经处理过了
+当event code == LV_EVENT_DRAW_MAIN || code == LV_EVENT_DRAW_POST || code == LV_EVENT_COVER_CHECK) 时，调用绘制函数进行绘制，lv_obj_draw(e);
+
