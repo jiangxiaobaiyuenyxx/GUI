@@ -108,3 +108,6 @@ event_send_core
 5.lv_obj_draw，从lv_event_t中拿到需要绘制的obj对象，得到需要重新绘制obj的哪些区域、背景色、source image等信息（lv_obj_init_draw_rect_dsc）
 
 6.lv_draw_rect，针对layer，开始进行绘制
+
+
+LV_EVENT_PREPROCESS这个宏表示的是在class 类型的event cb处理之前，event 已经处理过了
