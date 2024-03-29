@@ -102,3 +102,5 @@ event_send_core
 
 3.lv_obj_event_base(const lv_obj_class_t * class_p, lv_event_t * e)
 调用event_cb，处理事件，event_cb有两个类型，一个是class类型注册回调，一个是具体obj注册的回调函数（lv_obj_add_event_cb）
+
+4.lv_obj_event
