@@ -92,3 +92,13 @@ _lv_area_intersect
 
 lv_draw_add_task(lv_layer_t * layer, const lv_area_t * coords)
 将脏域的坐标加入一个task,然后加到队列里面去。所谓的脏域，就是本次task所要完成渲染的区域。
+
+
+1.lv_obj_send_event
+用于向指定的对象发送事件。事件可以是用户定义的自定义事件，由event_send_core处理接下来的事情
+event_send_core
+2.lv_event_send(list, e, true)-->lv_obj_event_base--->lv_event_send(list, e, false)
+这样一个流程之后，开始对该obj的父对象进行同样的处理，直到没有可以处理的父对象。
+
+3.lv_obj_event_base(const lv_obj_class_t * class_p, lv_event_t * e)
+调用event_cb，处理事件，event_cb有两个类型，一个是class类型注册回调，一个是具体obj注册的回调函数（lv_obj_add_event_cb）
