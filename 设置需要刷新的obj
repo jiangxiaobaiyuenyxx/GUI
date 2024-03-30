@@ -1,0 +1,14 @@
+1.lv_obj_invalidate(const lv_obj_t * obj);从调用它开始，这个obj就注定会被重新渲染
+
+2.lv_obj_invalidate_area(obj, &obj_coords);obj_coords这个区域是在&obj->coords这个基础上，结合具体配置，进行适当扩展
+
+3.lv_area_increase(&area_tmp, 5, 5)；根据经验值，对area区域进行经验扩展，上下左右加5个像素。
+
+4._lv_inv_area(lv_obj_get_display(obj),  &area_tmp);将该obj所对应需要刷新的区域加入到屏幕obj的刷新数组中。
+lv_obj_get_display就是获取屏幕对象，支持多个屏幕。
+
+5._lv_area_intersect(&com_area, area_p, &scr_area);获取该obj area和屏幕area的com区域
+
+6.1. _lv_area_is_in(&com_area, &disp->inv_areas[i], 0);判断com 区域是否已经在屏幕obj的inv_areas数组中。inv_areas这个数组就是屏幕obj将要重新渲染的脏区.
+
+6.2. lv_area_copy(&disp->inv_areas[disp->inv_p], tmp_area_p);将com area加入到屏幕obj的inv_areas数组中。
