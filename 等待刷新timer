@@ -1,26 +1,50 @@
 渲染timer开始工作啦！！！
 
-1._lv_display_refr_timer 开始工作啦
+1._lv_display_refr_timer
+开始工作啦
 
-lv_refr_join_area();
-
-refr_sync_areas();
-
-2.refr_invalid_areas，刷新经过连接处理的区域
+2.lv_refr_join_area();
+处理脏域，判断是否是合并过的区域，如果没有合并过，就进行合并，被合并的区域就需要设置一个合并的标志位
 /*Mark 'join_form' is joined into 'join_in'*/
 disp_refr->inv_area_joined[join_from] = 1;  inv_area_joined[]是一个存储是否合并标志位的数组
 
-3.refr_area
+并加入到屏幕obj的脏域数组中（lv_area_copy(&disp_refr->inv_areas[join_in], &joined_area);）
 
-4.refr_area_part
+3.refr_sync_areas();
+两个buffer的备份
 
-5.refr_obj_and_children
+4.refr_invalid_areas；
+刷新处理后的脏域，所谓的处理就是第2点中的合并，只处理join_in的数据和没有参与过合并的区域，通过inv_area_joined进行区分
+
+5.refr_area(&disp_refr->inv_areas[i]);
+开始处理屏幕对象的脏区
+
+4.refr_area_part(layer);
+有全刷和局部刷新的区分，layer_reshape_draw_buf会调整刷新的区域，根据是全刷还是局部刷新，调整刷新面积
+
+5.refr_obj_and_children；
+对三层进行刷新，先是最下面的一层，然后是中间层，最后是最上面的一层。
+lv_obj_t * bottom_layer;    /**< @see lv_display_get_layer_bottom*/
+lv_obj_t * top_layer;       /**< @see lv_display_get_layer_top*/
+lv_obj_t * sys_layer;       /**< @see lv_display_get_layer_sys*/
+在每一层上面，首先是对最小辈分的obj进行刷新，冒泡一样，往上递归处理。
+parent = lv_obj_get_parent(parent);
 
 6.refr_obj
 
 7.lv_obj_redraw
+对需要刷新的区域做最后的裁剪，
+lv_obj_send_event(obj, LV_EVENT_DRAW_MAIN_BEGIN, layer);
+lv_obj_send_event(obj, LV_EVENT_DRAW_MAIN, layer);
+lv_obj_send_event(obj, LV_EVENT_DRAW_MAIN_END, layer);
+
+LV_EVENT_DRAW_MAIN_BEGIN， /**<开始主绘图阶段*/
+LV_EVENT_DRAW_MAIN， /**<执行主绘图*/
+LV_EVENT_DRAW_MAIN_END， /**<完成主绘图阶段*/
 
 8.lv_obj_send_event
+
+
 
 
 重要结构体信息
