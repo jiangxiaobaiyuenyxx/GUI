@@ -15,3 +15,5 @@ lv_obj_get_display就是获取屏幕对象，支持多个屏幕。
 
 
 _lv_area_is_on(const lv_area_t * a1_p, const lv_area_t * a2_p)，判断a1是否包含了a2
+
+void _lv_area_join(lv_area_t * a_res_p, const lv_area_t * a1_p, const lv_area_t * a2_p), a1和a2合并为a area
