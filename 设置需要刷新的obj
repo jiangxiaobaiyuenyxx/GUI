@@ -12,3 +12,6 @@ lv_obj_get_display就是获取屏幕对象，支持多个屏幕。
 6.1. _lv_area_is_in(&com_area, &disp->inv_areas[i], 0);判断com 区域是否已经在屏幕obj的inv_areas数组中。inv_areas这个数组就是屏幕obj将要重新渲染的脏区.
 
 6.2. lv_area_copy(&disp->inv_areas[disp->inv_p], tmp_area_p);将com area加入到屏幕obj的inv_areas数组中。
+
+
+_lv_area_is_on(const lv_area_t * a1_p, const lv_area_t * a2_p)，判断a1是否包含了a2
