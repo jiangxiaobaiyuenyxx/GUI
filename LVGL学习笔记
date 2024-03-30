@@ -72,10 +72,6 @@ is_independent
 _lv_area_intersect
 检查两个区域是否有重叠
 
-
-
-
-
 LV_EVENT_PREPROCESS这个宏表示的是在class 类型的event cb处理之前，event 已经处理过了
 当event code == LV_EVENT_DRAW_MAIN || code == LV_EVENT_DRAW_POST || code == LV_EVENT_COVER_CHECK) 时，调用绘制函数进行绘制，lv_obj_draw(e);
 
