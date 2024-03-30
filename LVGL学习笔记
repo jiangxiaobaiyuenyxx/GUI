@@ -60,7 +60,6 @@ disp_refr->inv_area_joined[join_from] = 1;
 从这可以看出不同格式下palette的大小。
 
 
-
 lv_draw_dispatch_wait_for_request
 等待新的调度请求。
 lv_draw_dispatch_request
