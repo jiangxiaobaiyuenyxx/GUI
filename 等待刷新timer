@@ -3,8 +3,12 @@
 1._lv_display_refr_timer 开始工作啦
 
 lv_refr_join_area();
+
 refr_sync_areas();
-2.refr_invalid_areas，刷新已经过连接处理的区域
+
+2.refr_invalid_areas，刷新经过连接处理的区域
+/*Mark 'join_form' is joined into 'join_in'*/
+disp_refr->inv_area_joined[join_from] = 1;  inv_area_joined[]是一个存储是否合并标志位的数组
 
 3.refr_area
 
