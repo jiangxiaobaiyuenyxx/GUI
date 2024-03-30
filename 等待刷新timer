@@ -1,15 +1,55 @@
-_lv_display_refr_timer
+渲染timer开始工作啦！！！
 
-refr_invalid_areas
+1._lv_display_refr_timer 开始工作啦
 
-refr_area
+lv_refr_join_area();
+refr_sync_areas();
+2.refr_invalid_areas，刷新已经过连接处理的区域
 
-refr_area_part
+3.refr_area
 
-refr_obj_and_children
+4.refr_area_part
 
-refr_obj
+5.refr_obj_and_children
 
-lv_obj_redraw
+6.refr_obj
 
-lv_obj_send_event
+7.lv_obj_redraw
+
+8.lv_obj_send_event
+
+
+重要结构体信息
+
+#define disp_refr LV_GLOBAL_DEFAULT()->disp_refresh
+
+typedef struct _lv_global_t {
+...
+
+    lv_ll_t disp_ll;
+    lv_display_t * disp_refresh;
+    lv_display_t * disp_default;
+...
+}
+
+struct _lv_display_t {
+...
+/*---------------------
+     * Buffering
+     *--------------------*/
+    lv_draw_buf_t * buf_1;
+    lv_draw_buf_t * buf_2;
+
+    /** Internal, used by the library*/
+    lv_draw_buf_t * buf_act;
+...
+/** Invalidated (marked to redraw) areas*/
+    lv_area_t inv_areas[LV_INV_BUF_SIZE];
+    uint8_t inv_area_joined[LV_INV_BUF_SIZE];
+    uint32_t inv_p;
+    int32_t inv_en_cnt;
+
+    /** 双缓冲区同步区域(在上次刷新期间重新绘制,两个buffer直接进行备份) */
+    lv_ll_t sync_areas;
+...
+}
