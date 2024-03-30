@@ -51,15 +51,6 @@ disp_refr->inv_area_joined[join_from] = 1;
 此外，`struct _lv_draw_unit_t`还可以用于实现一些高级的绘图效果，例如渐变、阴影、透明度等等。
 通过在`struct _lv_draw_unit_t`中添加一些额外的属性和参数，可以实现更加复杂和高级的绘图效果。
 
-/*Skip palette*/
-    data += LV_COLOR_INDEXED_PALETTE_SIZE(buf->header.cf) * sizeof(lv_color32_t);
-#define LV_COLOR_INDEXED_PALETTE_SIZE(cf) ((cf) == LV_COLOR_FORMAT_I1 ? 2 :\
-                                           (cf) == LV_COLOR_FORMAT_I2 ? 4 :\
-                                           (cf) == LV_COLOR_FORMAT_I4 ? 16 :\
-                                           (cf) == LV_COLOR_FORMAT_I8 ? 256 : 0)
-从这可以看出不同格式下palette的大小。
-
-
 lv_draw_dispatch_wait_for_request
 等待新的调度请求。
 lv_draw_dispatch_request
@@ -74,3 +65,11 @@ _lv_area_intersect
 LV_EVENT_PREPROCESS这个宏表示的是在class 类型的event cb处理之前，event 已经处理过了
 当event code == LV_EVENT_DRAW_MAIN || code == LV_EVENT_DRAW_POST || code == LV_EVENT_COVER_CHECK) 时，调用绘制函数进行绘制，lv_obj_draw(e);
 
+
+/*Skip palette*/
+    data += LV_COLOR_INDEXED_PALETTE_SIZE(buf->header.cf) * sizeof(lv_color32_t);
+#define LV_COLOR_INDEXED_PALETTE_SIZE(cf) ((cf) == LV_COLOR_FORMAT_I1 ? 2 :\
+                                           (cf) == LV_COLOR_FORMAT_I2 ? 4 :\
+                                           (cf) == LV_COLOR_FORMAT_I4 ? 16 :\
+                                           (cf) == LV_COLOR_FORMAT_I8 ? 256 : 0)
+从这可以看出不同格式下palette的大小。
