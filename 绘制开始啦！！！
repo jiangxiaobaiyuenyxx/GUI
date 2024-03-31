@@ -14,14 +14,15 @@ event_send_core
 5.lv_obj_draw
 从lv_event_t中拿到需要绘制的obj对象，得到需要重新绘制obj的哪些区域、背景色、source image等信息（lv_obj_init_draw_rect_dsc）
 
-6.lv_draw_rect，针对layer，开始进行绘制。lv_draw_add_task(lv_layer_t * layer, const lv_area_t * coords)函数就是将要绘制的区域信息和layer的裁剪区域通过new task 
+6.lv_draw_rect，针对layer，开始进行绘制。
+lv_draw_add_task(lv_layer_t * layer, const lv_area_t * coords)函数就是将要绘制的区域信息和layer的裁剪区域通过new task 
 联系起来（填充一个绘制task），然后加到队列里面去。
 
 7.lv_draw_finalize_task_creation：
 创建和配置绘制任务时需要调用。 它将向小部件发送有关新绘制任务的事件并将其分配给绘制单元
 
 8.lv_draw_dispatch:
-尝试将绘制任务分派给绘制单元
+尝试获得一个绘制layer的任务，通过lv_draw_dispatch_layer进行分派
 
 9.lv_draw_dispatch_layer
 内部用于尝试调度具体层的绘制任务
@@ -30,9 +31,10 @@ event_send_core
 
 11.dispatch_cb由初始化的时候注册实际的处理函数draw_dispatch
 
-12.draw_dispatch函数，layer->draw_buf->data中是layer中的target buffer（line205）
+12.draw_dispatch函数，layer->draw_buf->data是layer中的target buffer（line205）
 
 13.lv_vg_lite_buffer_from_draw_buf，将layer层的targetbuffer（一个小脏域的地址）给到draw_uint
+lv_vg_lite_buffer_from_draw_buf(&u->target_buffer, layer->draw_buf);
 
 14.然后就可以根据task->type，调用对应的绘制函数。
 
@@ -41,3 +43,8 @@ event_send_core
 16.首先，会对绘制需求（task->draw_dsc）进行处理解析，解码出要贴的source image。（lv_vg_lite_buffer_open_image）
 
 17.然后进行底层贴图的驱动调用，进行贴图操作。
+
+
+
+layer里面包含了target buffer 和 area信息
+task 里面可以解析出source image数据、area信息。
