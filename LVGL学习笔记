@@ -32,7 +32,7 @@ lv_refr_join_area：
 对所有的脏域进行合并：
 1.先对某一脏域的标志进行判断，如果不等于0，说明该脏域已经被合并过了，处理下一个脏域。
 if(disp_refr->inv_area_joined[join_in] != 0) continue;
-2.只处理未连接的区域并忽略其本身
+2.只处理未连接或者未处理的区域并忽略其本身
  if(disp_refr->inv_area_joined[join_from] != 0 || join_in == join_from) {continue;}
 3.检查这些区域是否有接触
 if(_lv_area_is_on(&disp_refr->inv_areas[join_in], &disp_refr->inv_areas[join_from]) == false) {continue;}
