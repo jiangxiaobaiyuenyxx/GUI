@@ -1,6 +1,6 @@
 绘制开始啦！！！
 
-1.lv_obj_send_event
+1.lv_obj_send_event(lv_obj_t * obj, lv_event_code_t event_code, void * param)
 用于向指定的对象发送事件。事件可以是用户定义的自定义事件，由event_send_core处理接下来的事情
 event_send_core
 2.lv_event_send(list, e, true)-->lv_obj_event_base--->lv_event_send(list, e, false)
