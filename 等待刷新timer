@@ -3,7 +3,7 @@
 1._lv_display_refr_timer
 开始工作啦
 
-2.lv_refr_join_area();
+2.lv_refr_join_area();详细描述可以看下面的特别描述部分
 处理脏域，判断是否是合并过的区域，如果没有合并过，就进行合并，被合并的区域就需要设置一个合并的标志位
 /*Mark 'join_form' is joined into 'join_in'*/
 disp_refr->inv_area_joined[join_from] = 1;  inv_area_joined[]是一个存储是否合并标志位的数组
@@ -45,6 +45,21 @@ LV_EVENT_DRAW_MAIN_END， /**<完成主绘图阶段*/
 8.lv_obj_send_event
 
 
+特别描述部分！！！
+lv_refr_join_area：
+对所有的脏域进行合并：
+1.先对某一脏域的标志进行判断，如果不等于0，说明该脏域已经被合并过了，处理下一个脏域。
+if(disp_refr->inv_area_joined[join_in] != 0) continue;
+2.只处理未连接或者未处理的区域并忽略其本身
+ if(disp_refr->inv_area_joined[join_from] != 0 || join_in == join_from) {continue;}
+3.检查这些区域是否有接触
+if(_lv_area_is_on(&disp_refr->inv_areas[join_in], &disp_refr->inv_areas[join_from]) == false) {continue;}
+4.计算合并区域
+_lv_area_join(&joined_area, &disp_refr->inv_areas[join_in], &disp_refr->inv_areas[join_from]);
+5.判断，仅仅当合并后的区域小于合并之前的面积，才会合并，并将合并后的区域加入inv_areas
+lv_area_copy(&disp_refr->inv_areas[join_in], &joined_area);
+6.对处理过的脏域，进行标记
+disp_refr->inv_area_joined[join_from] = 1;
 
 
 重要结构体信息
