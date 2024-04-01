@@ -9,7 +9,8 @@ lv_event_send(list, e, true)-->lv_obj_event_base--->lv_event_send(list, e, false
 3.lv_obj_event_base(const lv_obj_class_t * class_p, lv_event_t * e)
 调用event_cb，处理事件，event_cb有两个类型，一个是class类型注册回调，一个是具体obj注册的回调函数（lv_obj_add_event_cb）
 
-4.lv_obj_event就是class 类型的event_cb。
+4.lv_obj_event就是class 类型的event_cb，在初始化的时候配置。
+lv_obj_add_event_cb函数则是后面根据需要注册具体的回调，lv_event_add(&obj->spec_attr->event_list, event_cb, filter, user_data);
 
 5.lv_obj_draw
 从lv_event_t中拿到需要绘制的obj对象，得到需要重新绘制obj的哪些区域、背景色、source image等信息（lv_obj_init_draw_rect_dsc）
