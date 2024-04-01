@@ -34,7 +34,7 @@ lv_draw_add_task(lv_layer_t * layer, const lv_area_t * coords)函数就是将要
 
 12.draw_dispatch函数，layer->draw_buf->data是layer中的target buffer（line205）
 
-13.lv_vg_lite_buffer_from_draw_buf，将layer层的targetbuffer（一个小脏域的地址）给到draw_uint
+13.lv_vg_lite_buffer_from_draw_buf，将layer层的targetbuffer给到draw_uint
 lv_vg_lite_buffer_from_draw_buf(&u->target_buffer, layer->draw_buf);
 
 14.然后就可以根据task->type，调用对应的绘制函数。
@@ -46,6 +46,14 @@ lv_vg_lite_buffer_from_draw_buf(&u->target_buffer, layer->draw_buf);
 17.然后进行底层贴图的驱动调用，进行贴图操作。
 
 
-
+第13点中，隐含着如下信息
+从u->task_act->draw_dsc解码出src_buf（lv_vg_lite_buffer_open_image）;
+u->base_unit.target_layer->draw_buf->data就是target buffer.
 layer里面包含了target buffer 和 area信息
 task 里面可以解析出source image数据、area信息。
+
+在第12点中，通过下面的code将task和layer联系在一起
+    u->base_unit.target_layer = layer;
+    u->base_unit.clip_area = &t->clip_area;
+    u->task_act = t;
+
