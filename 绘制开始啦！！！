@@ -26,8 +26,8 @@ lv_draw_add_task(lv_layer_t * layer, const lv_area_t * coords)函数就是将要
 8.lv_draw_dispatch:
 尝试获得一个绘制layer的任务，通过lv_draw_dispatch_layer进行分派
 
-9.lv_draw_dispatch_layer
-内部用于尝试调度具体层的绘制任务
+9.lv_draw_dispatch_layer(lv_display_t * disp, lv_layer_t * layer)
+内部用于尝试调度具体层的绘制任务，两个入参分别是显示对象和需要绘制的layer。
 
 10.最终调用dispatch_cb进行具体的绘制
 
