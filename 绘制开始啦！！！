@@ -72,3 +72,20 @@ LV_DRAW_TASK_STATE_QUEUED：表示绘图任务已经被添加到绘图队列中�
 LV_DRAW_TASK_STATE_IN_PROGRESS：表示绘图任务正在执行中。
 LV_DRAW_TASK_STATE_READY：表示绘图任务已经准备好执行，等待系统调度执行。
 
+
+这些是LVGL中的绘图任务类型，用于指定要绘制的图形类型。具体含义如下：
+
+- LV_DRAW_TASK_TYPE_FILL：填充矩形或圆形
+- LV_DRAW_TASK_TYPE_BORDER：绘制矩形或圆形的边框
+- LV_DRAW_TASK_TYPE_BOX_SHADOW：绘制矩形或圆形的阴影
+- LV_DRAW_TASK_TYPE_LABEL：绘制文本标签
+- LV_DRAW_TASK_TYPE_IMAGE：绘制图像
+- LV_DRAW_TASK_TYPE_LAYER：绘制图层
+- LV_DRAW_TASK_TYPE_LINE：绘制直线
+- LV_DRAW_TASK_TYPE_ARC：绘制弧线
+- LV_DRAW_TASK_TYPE_TRIANGLE：绘制三角形
+- LV_DRAW_TASK_TYPE_MASK_RECTANGLE：绘制矩形遮罩
+- LV_DRAW_TASK_TYPE_MASK_BITMAP：绘制位图遮罩
+- LV_DRAW_TASK_TYPE_VECTOR：绘制矢量图形
+
+LVGL使用这些任务类型来绘制各种UI元素，例如按钮、文本框、进度条等。开发人员可以使用LVGL提供的API来创建和定制这些UI元素。
