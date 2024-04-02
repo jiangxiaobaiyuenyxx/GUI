@@ -67,7 +67,8 @@ is_independent(lv_layer_t * layer, lv_draw_task_t * t_check)
 查找排队且独立的任务,根据area判断layer中的task和t_check是否有相交的地方,明确是否是独立的task.
 
 
-LV_DRAW_TASK_STATE_QUEUED是LVGL中绘图任务状态的一种，表示绘图任务已经被添加到绘图队列中，但尚未被执行。
-在LVGL中，所有的绘图操作都是异步执行的，即绘图任务会被添加到绘图队列中，等待系统调度执行。
-LV_DRAW_TASK_STATE_QUEUED状态表示该绘图任务已经被添加到队列中，但尚未被执行。
-当绘图任务被执行时，状态会变为LV_DRAW_TASK_STATE_READY，表示绘图任务已经准备好执行
+LV_DRAW_TASK_STATE_WAITING：表示绘图任务正在等待某些操作完成，例如正在等待图层渲染完成。
+LV_DRAW_TASK_STATE_QUEUED：表示绘图任务已经被添加到绘图队列中，等待系统调度执行。
+LV_DRAW_TASK_STATE_IN_PROGRESS：表示绘图任务正在执行中。
+LV_DRAW_TASK_STATE_READY：表示绘图任务已经准备好执行，等待系统调度执行。
+
