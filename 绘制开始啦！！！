@@ -15,11 +15,12 @@ lv_obj_add_event_cb函数则是后面根据需要注册具体的回调，lv_even
 5.lv_obj_redraw(lv_layer_t * layer, lv_obj_t * obj)
 从lv_event_t中拿到需要绘制的obj对象，得到需要重新绘制obj的哪些区域、背景色、source image等信息（lv_obj_init_draw_rect_dsc）
 
-6.lv_draw_rect，针对layer，开始进行绘制。
+6.lv_draw_rect(lv_layer_t * layer, const lv_draw_rect_dsc_t * dsc, const lv_area_t * coords)
+针对layer，开始进行绘制。
 lv_draw_add_task(lv_layer_t * layer, const lv_area_t * coords)函数就是将要绘制的区域信息和layer的裁剪区域通过new task 
 联系起来（填充一个绘制task），然后加到队列里面去。
 
-7.lv_draw_finalize_task_creation：
+7.lv_draw_finalize_task_creation(lv_layer_t * layer, lv_draw_task_t * t)
 创建和配置绘制任务时需要调用。 它将向小部件发送有关新绘制任务的事件并将其分配给绘制单元
 
 8.lv_draw_dispatch:
