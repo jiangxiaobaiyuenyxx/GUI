@@ -58,3 +58,5 @@ task 里面可以解析出source image数据、area信息。
     u->base_unit.clip_area = &t->clip_area;
     u->task_act = t;
 
+is_independent(lv_layer_t * layer, lv_draw_task_t * t_check)
+查找排队且独立的任务,根据area判断layer中的task和t_check是否有相交的地方,明确是否是独立的task.
